@@ -18,6 +18,7 @@ public interface DataSource {
     public List<Tratamiento> getTratamientos(String idAnimal);
     public void addFinca(Finca finca) throws SQLException;
     public void addAnimal(String finca, Animal animal) throws SQLException;
+    public void addTratamiento(String idAnimal, Tratamiento tratamiento) throws SQLException;
     public int countTipo(String finca, TipoAnimal tipo);
     public int getTotalAnimales(String finca);
 }

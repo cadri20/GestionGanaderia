@@ -191,5 +191,19 @@ public class SQLiteSource implements DataSource{
         return -1;
         
     }
+
+    @Override
+    public void addTratamiento(String idAnimal, Tratamiento tratamiento) throws SQLException{
+        String sql = "INSERT INTO tratamiento VALUES (?,?,?,?)";
+        PreparedStatement s = conn.prepareStatement(sql);
+        
+        s.setString(1, idAnimal);
+        s.setString(2, formatter.format(tratamiento.getFecha()));
+        s.setString(3, tratamiento.getDescripcion());
+        s.setString(4, tratamiento.getProductoUtilizado());
+        
+        s.executeUpdate();
+        
+    }
     
 }

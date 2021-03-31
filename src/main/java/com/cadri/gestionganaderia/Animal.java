@@ -158,12 +158,15 @@ public class Animal {
             matrizTratamientos[i][0] = SQLiteSource.formatter.format(tratamiento.getFecha());
             matrizTratamientos[i][1] = tratamiento.getDescripcion();
             matrizTratamientos[i][2] = tratamiento.getProductoUtilizado();
+            i++;
         }
         
         return matrizTratamientos;
     }
     
-    
+    public void addTratamiento(Tratamiento tratamiento) throws SQLException{
+        datos.addTratamiento(id, tratamiento);
+    }
     
     public enum TipoAnimal{
         TORO("toro"),

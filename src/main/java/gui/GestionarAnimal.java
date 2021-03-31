@@ -2,12 +2,16 @@ package gui;
 
 import com.cadri.gestionganaderia.Animal;
 import com.cadri.gestionganaderia.SQLiteSource;
+import com.cadri.gestionganaderia.Tratamiento;
 import java.awt.Image;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -70,16 +74,16 @@ public class GestionarAnimal extends javax.swing.JFrame {
         jTF_id = new javax.swing.JTextField();
         jTFNombre = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jBAniadirTratamiento = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableTratamientos = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jTextField6 = new javax.swing.JTextField();
+        jTFDescripcion = new javax.swing.JTextField();
+        jDateTratamiento = new com.toedter.calendar.JDateChooser();
+        jTFProductoUtilizado = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jTFFechaIngreso = new javax.swing.JTextField();
         jTFTipo = new javax.swing.JTextField();
@@ -135,7 +139,12 @@ public class GestionarAnimal extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton1.setText("Añadir");
+        jBAniadirTratamiento.setText("Añadir");
+        jBAniadirTratamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAniadirTratamientoActionPerformed(evt);
+            }
+        });
 
         jTableTratamientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -156,7 +165,7 @@ public class GestionarAnimal extends javax.swing.JFrame {
 
         jLabel10.setText("Fecha");
 
-        jLabel11.setText("Tratamiento");
+        jLabel11.setText("Descripcion");
 
         jLabel12.setText("Producto Utilizado");
 
@@ -180,17 +189,17 @@ public class GestionarAnimal extends javax.swing.JFrame {
                                 .addComponent(jLabel12))
                             .addGap(20, 20, 20)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTFDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTFProductoUtilizado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(77, 77, 77)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jDateTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addComponent(jButton1)
+                        .addComponent(jBAniadirTratamiento)
                         .addGap(56, 56, 56)
                         .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -208,18 +217,18 @@ public class GestionarAnimal extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDateTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTFDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTFProductoUtilizado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBAniadirTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(57, 57, 57))
         );
@@ -337,10 +346,24 @@ public class GestionarAnimal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jTF_idActionPerformed
 
+    private void jBAniadirTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAniadirTratamientoActionPerformed
+        LocalDate fechaTratamiento = jDateTratamiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        Tratamiento nuevoTratamiento = new Tratamiento(fechaTratamiento, jTFDescripcion.getText(), jTFProductoUtilizado.getText());
+        
+        try {
+            animalGestionar.addTratamiento(nuevoTratamiento);
+            JOptionPane.showMessageDialog(this, "Tratamiento registrado con éxito");
+            animalGestionar.ponerTratamientosEnTabla(jTableTratamientos);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al intentar registrar el tratamiento", "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jBAniadirTratamientoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBAniadirTratamiento;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateTratamiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -360,14 +383,14 @@ public class GestionarAnimal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFColor;
     private javax.swing.JTextField jTFCosto;
+    private javax.swing.JTextField jTFDescripcion;
     private javax.swing.JTextField jTFEdad;
     private javax.swing.JTextField jTFFechaIngreso;
     private javax.swing.JTextField jTFFechaNacimiento;
     private javax.swing.JTextField jTFNombre;
+    private javax.swing.JTextField jTFProductoUtilizado;
     private javax.swing.JTextField jTFTipo;
     private javax.swing.JTextField jTF_id;
     private javax.swing.JTable jTableTratamientos;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

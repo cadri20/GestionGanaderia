@@ -19,6 +19,7 @@ public class Main {
             DataSource datos = new SQLiteSource("C:\\Users\\Hp\\Documents\\ganaderia.db");
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             JFrame inicio = new Inicio(datos);
+            inicio.setLocationRelativeTo(null);
             inicio.setVisible(true);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

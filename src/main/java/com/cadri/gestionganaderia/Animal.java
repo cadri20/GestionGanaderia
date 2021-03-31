@@ -33,6 +33,17 @@ public class Animal {
     private String pathFoto;
     
     private DataSource datos;
+
+    public Animal(String id, String nombre, LocalDate fechaIngreso, LocalDate fechaNacimiento, TipoAnimal tipo, double costo, String color, String pathFoto) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaIngreso = fechaIngreso;
+        this.fechaNacimiento = fechaNacimiento;
+        this.tipo = tipo;
+        this.costo = costo;
+        this.color = color;
+        this.pathFoto = pathFoto;
+    }
     
     public Animal(ResultSet querySet, DataSource datos){
         try {
@@ -92,6 +103,10 @@ public class Animal {
 
     public String getColor() {
         return color;
+    }
+
+    public String getPathFoto() {
+        return pathFoto;
     }
     
     public String getEdad(){

@@ -104,9 +104,10 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCrearFincaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearFincaActionPerformed
-        JFrame frameCrearFinca = new CrearFinca();
+        JFrame frameCrearFinca = new CrearFinca(datos);
         frameCrearFinca.setLocationRelativeTo(this);
         frameCrearFinca.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBCrearFincaActionPerformed
 
     private void JBIngresarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBIngresarSistemaActionPerformed

@@ -1,11 +1,14 @@
 package com.cadri.gestionganaderia;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +23,13 @@ public class Finca {
     private String pathImagen;
     private DataSource datos;
 
+    public Finca(String nombre, double numHectareas, String ubicacion, String pathImagen) {
+        this.nombre = nombre;
+        this.numHectareas = numHectareas;
+        this.ubicacion = ubicacion;
+        this.pathImagen = pathImagen;
+    }
+    
     public Finca(ResultSet querySet, DataSource datos){
         try {
             this.nombre = querySet.getString("nombre_finca");
@@ -50,6 +60,10 @@ public class Finca {
         return matrizAnimales;
     }
     
+    public void addAnimal(Animal animal){
+        datos.addAnimal(nombre, animal);
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -61,9 +75,16 @@ public class Finca {
     public String getUbicacion() {
         return ubicacion;
     }
+
+    public String getPathImagen() {
+        return pathImagen;
+    }
     
-    public Image getFoto(){
-        return null;
+    public Image getFoto() throws IOException{
+        if(pathImagen == null)
+            return null;
+        
+        return ImageIO.read(new File(pathImagen));
     }
     
     public List<Animal> getAnimales(){

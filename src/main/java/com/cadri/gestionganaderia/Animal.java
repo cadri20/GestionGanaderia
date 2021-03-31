@@ -1,11 +1,22 @@
 package com.cadri.gestionganaderia;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,33 +25,37 @@ import java.util.logging.Logger;
 public class Animal {
     private String id;
     private String nombre;
-    private Date fechaIngreso;
-    private Date fechaNacimiento;
+    private LocalDate fechaIngreso;
+    private LocalDate fechaNacimiento;
     private TipoAnimal tipo;
     private double costo;
     private String color;
     private String pathFoto;
     
+    private DataSource datos;
+    
     public Animal(ResultSet querySet, DataSource datos){
         try {
+            this.datos = datos;
             this.id = querySet.getString("id_animal");
             this.nombre = querySet.getString("nombre_animal");
             
             String fechaIngresoStr = querySet.getString("fecha_ingreso");
             if(fechaIngresoStr != null)
-                this.fechaIngreso = datos.getDateFormatter().parse(fechaIngresoStr);
+                this.fechaIngreso = LocalDate.parse(fechaIngresoStr, SQLiteSource.formatter);
+            
             else
                 this.fechaIngreso = null;
             
             String fechaNacimientoStr = querySet.getString("fecha_nacimiento");
             if(fechaNacimientoStr != null)
-                this.fechaNacimiento = datos.getDateFormatter().parse(fechaNacimientoStr);
+                this.fechaNacimiento = LocalDate.parse(fechaNacimientoStr, SQLiteSource.formatter);
             else
                 this.fechaNacimiento = null;
             
             String tipoStr = querySet.getString("tipo");
             if(tipoStr != null)
-                this.tipo = TipoAnimal.valueOf(tipoStr);
+                this.tipo = TipoAnimal.getTipo(tipoStr);
             else
                 this.tipo = null;
             this.costo = querySet.getDouble("costo");
@@ -48,9 +63,7 @@ public class Animal {
             this.pathFoto = querySet.getString("path_foto");
         } catch (SQLException ex) {
             Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 
     public String getId() {
@@ -61,11 +74,11 @@ public class Animal {
         return nombre;
     }
 
-    public Date getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
@@ -81,8 +94,61 @@ public class Animal {
         return color;
     }
     
+    public String getEdad(){
+        if(fechaNacimiento == null)
+            return null;
+        
+        LocalDate ahora = LocalDate.now();
+        
+        Period periodo = Period.between(fechaNacimiento, ahora);
+        
+        int anios = periodo.getYears();
+        int meses = periodo.getMonths();
+        int dias = periodo.getDays();
+        
+        String edad = "";
+        
+        if(anios != 0)
+            edad += anios + " años ";
+        if(meses != 0)
+            edad += meses + " meses ";
+        if(dias != 0)
+            edad += dias + " dias ";
+        
+        return edad;
+    }
     
-   
+    
+    public List<Tratamiento> getTratamientos(){
+        return datos.getTratamientos(id);
+    }
+    
+    public Image getFoto() throws IOException{
+        if(pathFoto == null)
+            return null;
+        
+        return ImageIO.read(new File(pathFoto));
+    }
+    
+    public void ponerTratamientosEnTabla(JTable tabla){
+        tabla.setModel(new DefaultTableModel(getMatrizTratamientos(), new String[]{"Fecha", "Descripción", "Tratamiento"}));
+    }
+    
+    private String[][] getMatrizTratamientos(){
+        List<Tratamiento> listaTratamientos = getTratamientos();
+        String[][] matrizTratamientos = new String[listaTratamientos.size()][3];
+        
+        int i = 0;
+        for(Tratamiento tratamiento: listaTratamientos){
+            matrizTratamientos[i][0] = SQLiteSource.formatter.format(tratamiento.getFecha());
+            matrizTratamientos[i][1] = tratamiento.getDescripcion();
+            matrizTratamientos[i][2] = tratamiento.getProductoUtilizado();
+        }
+        
+        return matrizTratamientos;
+    }
+    
+    
     
     public enum TipoAnimal{
         TORO("toro"),
@@ -102,6 +168,13 @@ public class Animal {
             return tipo;
         }
         
-        
+        public static TipoAnimal getTipo(String tipoStr){
+            for(TipoAnimal tipo: values()){
+                if(tipo.toString().equalsIgnoreCase(tipoStr))
+                    return tipo;
+            }
+            
+            return null;
+        }
     }
 }

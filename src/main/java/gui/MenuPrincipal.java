@@ -1,9 +1,11 @@
 package gui;
 
+import com.cadri.gestionganaderia.Animal;
 import com.cadri.gestionganaderia.DataSource;
 import com.cadri.gestionganaderia.Finca;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 /**
  *
@@ -18,6 +20,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal(Finca finca, DataSource datos) {
         this.finca = finca;
+        this.datos = datos;
         initComponents();
         jTFNombre.setText(finca.getNombre());
         jTFHectareas.setText(Double.toString(finca.getNumHectareas()));
@@ -49,7 +52,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jBAgregarAnimal = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBGestionarAnimal = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAnimales = new javax.swing.JTable();
@@ -160,7 +163,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Gestionar Animal");
+        jBGestionarAnimal.setText("Gestionar Animal");
+        jBGestionarAnimal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGestionarAnimalActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Eliminar Animal");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +212,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 4, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBGestionarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(72, 72, 72))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,7 +260,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBGestionarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -289,10 +297,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         new AgregarAnimal().setVisible(true);
     }//GEN-LAST:event_jBAgregarAnimalActionPerformed
 
+    private void jBGestionarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGestionarAnimalActionPerformed
+        int filaSeleccionada = jTableAnimales.getSelectedRow();
+        String idSeleccionada = jTableAnimales.getValueAt(filaSeleccionada, 0).toString();
+        Animal animalSeleccionado = datos.getAnimal(idSeleccionada);
+        
+        JFrame gestionarAnimal = new GestionarAnimal(animalSeleccionado);
+        gestionarAnimal.setLocationRelativeTo(this);
+        gestionarAnimal.setVisible(true);
+    }//GEN-LAST:event_jBGestionarAnimalActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregarAnimal;
+    private javax.swing.JButton jBGestionarAnimal;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;

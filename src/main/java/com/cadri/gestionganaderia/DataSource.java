@@ -14,5 +14,4 @@ public interface DataSource {
     public Finca getFinca(String nombreFinca);
     public List<Finca> getFincas();
     public List<Tratamiento> getTratamientos(String idAnimal);
-    public DateFormat getDateFormatter();
 }

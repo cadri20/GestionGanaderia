@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,10 +20,10 @@ import java.util.logging.Logger;
 public class SQLiteSource implements DataSource{
 
     private Connection conn;
-    private SimpleDateFormat formatter;
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    
     public SQLiteSource(String url) throws SQLException{
         conn = DriverManager.getConnection("jdbc:sqlite:" + url);
-        formatter = new SimpleDateFormat("dd/mm/yyyy");
     }
     
     @Override
@@ -100,12 +101,25 @@ public class SQLiteSource implements DataSource{
 
     @Override
     public List<Tratamiento> getTratamientos(String idAnimal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public DateFormat getDateFormatter() {
-        return formatter;
+        String sql = "SELECT * FROM tratamiento WHERE id_animal = '" + idAnimal + "'";
+        ResultSet rs = null;
+        List<Tratamiento> listaTratamientos = new ArrayList<>();
+        try {
+            Statement s = conn.createStatement();
+            rs = s.executeQuery(sql);
+            
+            while(rs.next()){
+                listaTratamientos.add(new Tratamiento(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(rs == null)
+            return null;
+        else
+            return listaTratamientos;
+                 
     }
     
 }

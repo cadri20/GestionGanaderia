@@ -60,7 +60,7 @@ public class Finca {
         return matrizAnimales;
     }
     
-    public void addAnimal(Animal animal){
+    public void addAnimal(Animal animal) throws SQLException{
         datos.addAnimal(nombre, animal);
     }
     

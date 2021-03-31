@@ -29,6 +29,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         finca.ponerAnimalesEnTabla(jTableAnimales);
     }
 
+    public void actualizarDatosMostrados(){
+        finca.ponerAnimalesEnTabla(jTableAnimales);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -294,7 +297,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jBAgregarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarAnimalActionPerformed
-        new AgregarAnimal().setVisible(true);
+        JFrame creacionAnimal = new AgregarAnimal(finca, this);
+        creacionAnimal.setLocationRelativeTo(this);
+        creacionAnimal.setVisible(true);
     }//GEN-LAST:event_jBAgregarAnimalActionPerformed
 
     private void jBGestionarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGestionarAnimalActionPerformed

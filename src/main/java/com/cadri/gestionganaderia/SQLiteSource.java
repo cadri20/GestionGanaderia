@@ -147,10 +147,10 @@ public class SQLiteSource implements DataSource{
           
         PreparedStatement s = conn.prepareStatement(sql);
         s.setString(1, animal.getId());
-        s.setString(1, finca);
-        s.setString(2, animal.getNombre());
-        s.setDate(4, Date.valueOf(animal.getFechaIngreso()));
-        s.setDate(5, Date.valueOf(animal.getFechaNacimiento()));
+        s.setString(2, finca);
+        s.setString(3, animal.getNombre());
+        s.setString(4, SQLiteSource.formatter.format(animal.getFechaIngreso()));
+        s.setString(5, SQLiteSource.formatter.format(animal.getFechaNacimiento()));
         s.setString(6, animal.getTipo().toString());
         s.setDouble(7, animal.getCosto());
         s.setString(8, animal.getColor());

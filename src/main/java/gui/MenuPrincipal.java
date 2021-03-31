@@ -23,6 +23,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTFHectareas.setText(Double.toString(finca.getNumHectareas()));
         jTFUbicacion.setText(finca.getUbicacion());
         
+        finca.ponerAnimalesEnTabla(jTableAnimales);
     }
 
     /**
@@ -51,7 +52,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableAnimales = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -168,7 +169,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAnimales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -179,8 +180,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 "ID", "Nombre"
             }
         ));
-        jTable1.setRowHeight(32);
-        jScrollPane1.setViewportView(jTable1);
+        jTableAnimales.setRowHeight(32);
+        jScrollPane1.setViewportView(jTableAnimales);
 
         jLabel5.setText("Numero de vacas:");
 
@@ -310,7 +311,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTFNombre;
     private javax.swing.JTextField jTFUbicacion;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableAnimales;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;

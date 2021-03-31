@@ -1,5 +1,6 @@
 package com.cadri.gestionganaderia;
 
+import java.text.DateFormat;
 import java.util.List;
 
 /**
@@ -13,4 +14,5 @@ public interface DataSource {
     public Finca getFinca(String nombreFinca);
     public List<Finca> getFincas();
     public List<Tratamiento> getTratamientos(String idAnimal);
+    public DateFormat getDateFormatter();
 }

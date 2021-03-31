@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,15 +20,34 @@ public class Finca {
     private String pathImagen;
     private DataSource datos;
 
-    public Finca(ResultSet querySet){
+    public Finca(ResultSet querySet, DataSource datos){
         try {
             this.nombre = querySet.getString("nombre_finca");
             this.numHectareas = querySet.getDouble("hectareas");
             this.ubicacion = querySet.getString("ubicacion");
             this.pathImagen = querySet.getString("path_foto");
+            this.datos = datos;
         } catch (SQLException ex) {
             Logger.getLogger(Finca.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void ponerAnimalesEnTabla(JTable tabla){
+        tabla.setModel(new DefaultTableModel(getMatrizAnimales(), new String[]{"ID", "Nombre"}));
+    }
+    
+    private String[][] getMatrizAnimales(){
+        List<Animal> listaAnimales = getAnimales();
+        String[][] matrizAnimales = new String[listaAnimales.size()][2];
+        int i = 0;
+        
+        for(Animal animal: listaAnimales){
+            matrizAnimales[i][0] = animal.getId();
+            matrizAnimales[i][1] = animal.getNombre();
+            i++;
+        }
+        
+        return matrizAnimales;
     }
     
     public String getNombre() {

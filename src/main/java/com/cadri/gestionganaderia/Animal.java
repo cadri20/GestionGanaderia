@@ -169,11 +169,11 @@ public class Animal {
     }
     
     public enum TipoAnimal{
-        TORO("toro"),
-        VACA("vaca"),
-        TORETE("torete"),
-        TERNERO("ternero"),
-        VACONA("vacona");
+        TORO("Toro"),
+        VACA("Vaca"),
+        TORETE("Torete"),
+        TERNERO("Ternero"),
+        VACONA("Vacona");
         
         private String tipo;
         

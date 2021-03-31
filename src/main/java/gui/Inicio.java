@@ -1,5 +1,8 @@
 package gui;
 
+import com.cadri.gestionganaderia.DataSource;
+import com.cadri.gestionganaderia.Finca;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 /**
@@ -8,10 +11,12 @@ import javax.swing.JFrame;
  */
 public class Inicio extends javax.swing.JFrame {
 
+    private DataSource datos;
     /**
      * Creates new form Inicio
      */
-    public Inicio() {
+    public Inicio(DataSource datos) {
+        this.datos = datos;
         initComponents();
     }
 
@@ -26,10 +31,10 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCBFincas = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jBCrearFinca = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        JBIngresarSistema = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,7 +43,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel2.setText("Seleccione una finca: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBFincas.setModel(new javax.swing.DefaultComboBoxModel<>(datos.getFincas().toArray(new Finca[datos.getFincas().size()])));
 
         jLabel3.setText("o");
 
@@ -49,10 +54,10 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Ingresar al Sistema");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        JBIngresarSistema.setText("Ingresar al Sistema");
+        JBIngresarSistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                JBIngresarSistemaActionPerformed(evt);
             }
         });
 
@@ -73,8 +78,8 @@ public class Inicio extends javax.swing.JFrame {
                             .addComponent(jBCrearFinca))
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))))
+                            .addComponent(jCBFincas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JBIngresarSistema))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,13 +90,13 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBFincas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCrearFinca)
-                    .addComponent(jButton2))
+                    .addComponent(JBIngresarSistema))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
@@ -104,52 +109,17 @@ public class Inicio extends javax.swing.JFrame {
         frameCrearFinca.setVisible(true);
     }//GEN-LAST:event_jBCrearFincaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        JFrame menuPrincipal = new MenuPrincipal();
+    private void JBIngresarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBIngresarSistemaActionPerformed
+        JFrame menuPrincipal = new MenuPrincipal(datos.getFinca(jCBFincas.getSelectedItem().toString()), datos);
         menuPrincipal.setLocationRelativeTo(this);
         menuPrincipal.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Inicio().setVisible(true);
-            }
-        });
-    }
+    }//GEN-LAST:event_JBIngresarSistemaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBIngresarSistema;
     private javax.swing.JButton jBCrearFinca;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Finca> jCBFincas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

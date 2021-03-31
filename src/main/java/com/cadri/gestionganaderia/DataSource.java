@@ -1,5 +1,6 @@
 package com.cadri.gestionganaderia;
 
+import com.cadri.gestionganaderia.Animal.TipoAnimal;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.List;
@@ -17,4 +18,6 @@ public interface DataSource {
     public List<Tratamiento> getTratamientos(String idAnimal);
     public void addFinca(Finca finca) throws SQLException;
     public void addAnimal(String finca, Animal animal) throws SQLException;
+    public int countTipo(String finca, TipoAnimal tipo);
+    public int getTotalAnimales(String finca);
 }

@@ -159,5 +159,37 @@ public class SQLiteSource implements DataSource{
         s.executeUpdate();
 
     }
+
+    @Override
+    public int countTipo(String finca, Animal.TipoAnimal tipo) {
+        String sql = "SELECT COUNT(*) FROM animal WHERE tipo = '" + tipo.toString() + "' and nombre_finca = '" + finca + "'";
+        ResultSet rs = null;
+        try {
+            Statement s = conn.createStatement();
+            rs = s.executeQuery(sql);
+            return rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return -1;
+
+    }
+
+    @Override
+    public int getTotalAnimales(String finca) {
+        String sql = "SELECT COUNT(*) FROM animal WHERE nombre_finca = '" + finca + "'";
+        try {
+            Statement s = conn.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            
+            return rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return -1;
+        
+    }
     
 }

@@ -1,5 +1,6 @@
 package com.cadri.gestionganaderia;
 
+import com.cadri.gestionganaderia.Animal.TipoAnimal;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -91,6 +92,14 @@ public class Finca {
         return datos.getAnimales(nombre);
     }
 
+    public int getNum(TipoAnimal tipo){
+        return datos.countTipo(nombre, tipo);
+    }
+    
+    public int getTotalAnimales(){
+        return datos.getTotalAnimales(nombre);
+    }
+    
     @Override
     public String toString() {
         return nombre;

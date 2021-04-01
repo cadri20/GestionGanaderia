@@ -229,7 +229,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                      <Component id="jButton3" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <Component id="jBEliminar" min="-2" pref="128" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jBAgregarAnimal" alignment="0" min="-2" pref="126" max="-2" attributes="0"/>
                               </Group>
@@ -321,7 +321,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jBGestionarAnimal" min="-2" pref="43" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="jButton3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="jBEliminar" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane1" min="-2" pref="163" max="-2" attributes="0"/>
                       </Group>
@@ -347,12 +347,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBGestionarAnimalActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton3">
+            <Component class="javax.swing.JButton" name="jBEliminar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar Animal"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBEliminarActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">

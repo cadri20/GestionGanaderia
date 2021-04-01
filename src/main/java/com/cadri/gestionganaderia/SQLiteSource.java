@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.sqlite.SQLiteConfig;
 
 /**
  *
@@ -26,6 +27,8 @@ public class SQLiteSource implements DataSource{
     
     public SQLiteSource(String url) throws SQLException{
         conn = DriverManager.getConnection("jdbc:sqlite:" + url);
+        Statement s = conn.createStatement();
+        s.execute("PRAGMA foreign_keys = ON");
     }
     
     @Override
@@ -45,7 +48,7 @@ public class SQLiteSource implements DataSource{
             return new Animal(rs, this);
     }
 
-    @Override
+    @Override                                                                                                                               
     public List<Animal> getAnimales(String nombreFinca) {
         String sql = "SELECT * FROM animal WHERE nombre_finca = '" + nombreFinca + "'";
         ResultSet rs = null;
@@ -204,6 +207,13 @@ public class SQLiteSource implements DataSource{
         
         s.executeUpdate();
         
+    }
+
+    @Override
+    public void eliminarAnimal(String idAnimal) throws SQLException {
+        String sql = "DELETE FROM animal WHERE id_animal = '" + idAnimal + "'";
+        Statement s = conn.createStatement();
+        s.executeUpdate(sql);
     }
     
 }

@@ -3,9 +3,13 @@ package gui;
 import com.cadri.gestionganaderia.Animal;
 import com.cadri.gestionganaderia.DataSource;
 import com.cadri.gestionganaderia.Finca;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,7 +67,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jBAgregarAnimal = new javax.swing.JButton();
         jBGestionarAnimal = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAnimales = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
@@ -186,10 +190,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Eliminar Animal");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jBEliminar.setText("Eliminar Animal");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jBEliminarActionPerformed(evt);
             }
         });
 
@@ -246,7 +250,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jBAgregarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,7 +319,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jBGestionarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
@@ -342,9 +346,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        int filaSeleccionada = jTableAnimales.getSelectedRow();
+        String idSeleccionada = jTableAnimales.getValueAt(filaSeleccionada, 0).toString();    
+        int eleccion = JOptionPane.showConfirmDialog(this, "¿Esta seguro de que desea eliminar el animal con id " + idSeleccionada + "?", "", JOptionPane.YES_NO_OPTION);
+        if(eleccion == JOptionPane.NO_OPTION)
+            return;
+        
+        try {
+            datos.eliminarAnimal(idSeleccionada);
+            JOptionPane.showMessageDialog(this, "Animal eliminado éxitosamente");
+            actualizarDatosMostrados();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al intentar eliminar el animal", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBAgregarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarAnimalActionPerformed
         JFrame creacionAnimal = new AgregarAnimal(finca, this);
@@ -364,9 +381,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregarAnimal;
+    private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGestionarAnimal;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

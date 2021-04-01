@@ -142,7 +142,8 @@ public class Animal {
         if(pathFoto == null)
             return null;
         
-        return ImageIO.read(new File(pathFoto));
+        File archivoFoto = new File(pathFoto);
+        return ImageIO.read(archivoFoto);
     }
     
     public void ponerTratamientosEnTabla(JTable tabla){

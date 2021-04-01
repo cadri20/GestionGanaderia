@@ -4,6 +4,7 @@ import com.cadri.gestionganaderia.Animal;
 import com.cadri.gestionganaderia.Animal.TipoAnimal;
 import com.cadri.gestionganaderia.DataSource;
 import com.cadri.gestionganaderia.Finca;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -225,7 +226,7 @@ public class AgregarAnimal extends javax.swing.JFrame {
     private void jBSelImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSelImagenActionPerformed
         fc.showOpenDialog(this);
         try {
-            BufferedImage imagen = ImageIO.read(fc.getSelectedFile());
+            Image imagen = ImageIO.read(fc.getSelectedFile());
             jPanelImagen.getGraphics().drawImage(imagen, 0, 0, null);
         } catch (IOException ex) {
             Logger.getLogger(AgregarAnimal.class.getName()).log(Level.SEVERE, null, ex);

@@ -168,6 +168,10 @@ public class Animal {
         datos.addTratamiento(id, tratamiento);
     }
     
+    public void eliminarTratamiento(String fecha, String descripcion) throws SQLException{
+        datos.eliminarTratamiento(id, fecha, descripcion);
+    }
+    
     public enum TipoAnimal{
         TORO("Toro"),
         VACA("Vaca"),

@@ -84,7 +84,7 @@ public class GestionarAnimal extends javax.swing.JFrame {
         jTFDescripcion = new javax.swing.JTextField();
         jDateTratamiento = new com.toedter.calendar.JDateChooser();
         jTFProductoUtilizado = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jBEliminarTratamiento = new javax.swing.JButton();
         jTFFechaIngreso = new javax.swing.JTextField();
         jTFTipo = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
@@ -169,7 +169,12 @@ public class GestionarAnimal extends javax.swing.JFrame {
 
         jLabel12.setText("Producto Utilizado");
 
-        jButton2.setText("Eliminar");
+        jBEliminarTratamiento.setText("Eliminar");
+        jBEliminarTratamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarTratamientoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -201,7 +206,7 @@ public class GestionarAnimal extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addComponent(jBAniadirTratamiento)
                         .addGap(56, 56, 56)
-                        .addComponent(jButton2)))
+                        .addComponent(jBEliminarTratamiento)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -229,7 +234,7 @@ public class GestionarAnimal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jBAniadirTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jBEliminarTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(57, 57, 57))
         );
 
@@ -323,11 +328,12 @@ public class GestionarAnimal extends javax.swing.JFrame {
                                 .addComponent(jLabel6))
                             .addComponent(jTFFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(jTFFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
-                            .addComponent(jTFEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTFEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel13)
+                                .addComponent(jTFFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,9 +366,28 @@ public class GestionarAnimal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBAniadirTratamientoActionPerformed
 
+    private void jBEliminarTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarTratamientoActionPerformed
+        int filaSeleccionada = jTableTratamientos.getSelectedRow();
+        String fechaStr = jTableTratamientos.getValueAt(filaSeleccionada, 0).toString();
+        String descripcion = jTableTratamientos.getValueAt(filaSeleccionada, 1).toString();
+        
+        int eleccion = JOptionPane.showConfirmDialog(this, "¿Está seguro de que quiere eliminar el tratamiento seleccionado?", "", JOptionPane.YES_NO_OPTION);
+        if(eleccion == JOptionPane.NO_OPTION)
+            return;
+        
+        try {
+            animalGestionar.eliminarTratamiento(fechaStr, descripcion);
+            JOptionPane.showMessageDialog(this, "Tratamiento eliminado con éxito");
+            animalGestionar.ponerTratamientosEnTabla(jTableTratamientos);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarAnimal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al intentar eliminar el tratamiento", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBEliminarTratamientoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAniadirTratamiento;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jBEliminarTratamiento;
     private com.toedter.calendar.JDateChooser jDateTratamiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

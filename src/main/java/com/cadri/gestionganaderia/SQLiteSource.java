@@ -215,5 +215,12 @@ public class SQLiteSource implements DataSource{
         Statement s = conn.createStatement();
         s.executeUpdate(sql);
     }
+
+    @Override
+    public void eliminarTratamiento(String id_animal, String fecha, String descripcion) throws SQLException {
+        String sql = "DELETE FROM tratamiento WHERE id_animal = '" + id_animal + "' and fecha = '" + fecha + "' and descripcion = '" + descripcion + "'";
+        Statement s = conn.createStatement();
+        s.executeUpdate(sql);
+    }
     
 }

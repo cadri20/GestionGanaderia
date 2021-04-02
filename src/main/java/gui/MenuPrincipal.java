@@ -60,8 +60,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTFNombre = new javax.swing.JTextField();
         jTFHectareas = new javax.swing.JTextField();
         jTFUbicacion = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jBEditarDatos = new javax.swing.JButton();
+        jBGuardarCambios = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabelImagen = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -101,9 +101,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jTFUbicacion.setEditable(false);
 
-        jButton1.setText("Editar Datos");
+        jBEditarDatos.setText("Editar Datos");
 
-        jButton4.setText("Guardar Cambios");
+        jBGuardarCambios.setText("Guardar Cambios");
 
         jLabel4.setText("Foto");
 
@@ -120,14 +120,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addComponent(jLabel2)
                         .addComponent(jLabel1))
-                    .addComponent(jButton1))
+                    .addComponent(jBEditarDatos))
                 .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jTFNombre)
                         .addComponent(jTFHectareas)
                         .addComponent(jTFUbicacion, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
-                    .addComponent(jButton4))
+                    .addComponent(jBGuardarCambios))
                 .addGap(60, 60, 60)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -156,8 +156,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(jTFUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton4)))
+                            .addComponent(jBEditarDatos)
+                            .addComponent(jBGuardarCambios)))
                     .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
@@ -370,10 +370,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregarAnimal;
+    private javax.swing.JButton jBEditarDatos;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGestionarAnimal;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jBGuardarCambios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

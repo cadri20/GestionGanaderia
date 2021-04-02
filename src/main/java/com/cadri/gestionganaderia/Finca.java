@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author cadri
  */
 public class Finca {
+    private int id;
     private String nombre;
     private double numHectareas;
     private String ubicacion;
@@ -33,6 +34,7 @@ public class Finca {
     
     public Finca(ResultSet querySet, DataSource datos){
         try {
+            this.id = querySet.getInt("id");
             this.nombre = querySet.getString("nombre_finca");
             this.numHectareas = querySet.getDouble("hectareas");
             this.ubicacion = querySet.getString("ubicacion");
@@ -62,7 +64,7 @@ public class Finca {
     }
     
     public void addAnimal(Animal animal) throws SQLException{
-        datos.addAnimal(nombre, animal);
+        datos.addAnimal(id, animal);
     }
     
     public String getNombre() {
@@ -89,15 +91,15 @@ public class Finca {
     }
     
     public List<Animal> getAnimales(){
-        return datos.getAnimales(nombre);
+        return datos.getAnimales(id);
     }
 
     public int getNum(TipoAnimal tipo){
-        return datos.countTipo(nombre, tipo);
+        return datos.countTipo(id, tipo);
     }
     
     public int getTotalAnimales(){
-        return datos.getTotalAnimales(nombre);
+        return datos.getTotalAnimales(id);
     }
     
     @Override

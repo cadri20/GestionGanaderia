@@ -49,8 +49,8 @@ public class SQLiteSource implements DataSource{
     }
 
     @Override                                                                                                                               
-    public List<Animal> getAnimales(String nombreFinca) {
-        String sql = "SELECT * FROM animal WHERE nombre_finca = '" + nombreFinca + "'";
+    public List<Animal> getAnimales(int idFinca) {
+        String sql = "SELECT * FROM animal WHERE id_finca = " + idFinca;
         ResultSet rs = null;
         List<Animal> animales = new ArrayList<>();
         try {
@@ -129,7 +129,7 @@ public class SQLiteSource implements DataSource{
 
     @Override
     public void addFinca(Finca finca) {
-        String sql = "INSERT INTO finca VALUES(?,?,?,?)";
+        String sql = "INSERT INTO finca(nombre_finca,hectareas,ubicacion,path_foto) VALUES(?,?,?,?)";
         try {
             PreparedStatement s = conn.prepareStatement(sql);
             s.setString(1, finca.getNombre());
@@ -145,12 +145,12 @@ public class SQLiteSource implements DataSource{
     }
 
     @Override
-    public void addAnimal(String finca, Animal animal) throws SQLException{
+    public void addAnimal(int idFinca, Animal animal) throws SQLException{
         String sql = "INSERT INTO animal VALUES(?,?,?,?,?,?,?,?,?)";
           
         PreparedStatement s = conn.prepareStatement(sql);
         s.setString(1, animal.getId());
-        s.setString(2, finca);
+        s.setInt(2, idFinca);;
         s.setString(3, animal.getNombre());
         s.setString(4, SQLiteSource.formatter.format(animal.getFechaIngreso()));
         s.setString(5, SQLiteSource.formatter.format(animal.getFechaNacimiento()));
@@ -164,8 +164,8 @@ public class SQLiteSource implements DataSource{
     }
 
     @Override
-    public int countTipo(String finca, Animal.TipoAnimal tipo) {
-        String sql = "SELECT COUNT(*) FROM animal WHERE tipo = '" + tipo.toString() + "' and nombre_finca = '" + finca + "'";
+    public int countTipo(int idFinca, Animal.TipoAnimal tipo) {
+        String sql = "SELECT COUNT(*) FROM animal WHERE tipo = '" + tipo.toString() + "' and id_finca = " + idFinca ;
         ResultSet rs = null;
         try {
             Statement s = conn.createStatement();
@@ -180,8 +180,8 @@ public class SQLiteSource implements DataSource{
     }
 
     @Override
-    public int getTotalAnimales(String finca) {
-        String sql = "SELECT COUNT(*) FROM animal WHERE nombre_finca = '" + finca + "'";
+    public int getTotalAnimales(int idFinca) {
+        String sql = "SELECT COUNT(*) FROM animal WHERE id_finca = " + idFinca;
         try {
             Statement s = conn.createStatement();
             ResultSet rs = s.executeQuery(sql);
@@ -222,5 +222,5 @@ public class SQLiteSource implements DataSource{
         Statement s = conn.createStatement();
         s.executeUpdate(sql);
     }
-    
+        
 }

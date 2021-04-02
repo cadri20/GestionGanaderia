@@ -108,6 +108,35 @@ public class Animal {
     public String getPathFoto() {
         return pathFoto;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setFechaIngreso(LocalDate fechaIngreso) {
+        this.fechaIngreso = fechaIngreso;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setTipo(TipoAnimal tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setPathFoto(String pathFoto) {
+        this.pathFoto = pathFoto;
+    }
+    
     
     public String getEdad(){
         if(fechaNacimiento == null)
@@ -171,6 +200,10 @@ public class Animal {
     
     public void eliminarTratamiento(String fecha, String descripcion) throws SQLException{
         datos.eliminarTratamiento(id, fecha, descripcion);
+    }
+    
+    public void actualizar() throws SQLException{
+        datos.actualizarAnimal(this);
     }
     
     public enum TipoAnimal{

@@ -1,6 +1,7 @@
 package gui;
 
 import com.cadri.gestionganaderia.Animal;
+import com.cadri.gestionganaderia.Animal.TipoAnimal;
 import com.cadri.gestionganaderia.SQLiteSource;
 import com.cadri.gestionganaderia.Tratamiento;
 import java.awt.Canvas;
@@ -33,19 +34,30 @@ public class GestionarAnimal extends javax.swing.JFrame {
         jTFNombre.setText(animalGestionar.getNombre());
         LocalDate fechaIngreso = animalGestionar.getFechaIngreso();
         if(fechaIngreso != null)
-            jTFFechaIngreso.setText(SQLiteSource.formatter.format(fechaIngreso));
+            jDateIngreso.setDate(Date.from(animalGestionar.getFechaIngreso().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         LocalDate fechaNacimiento = animalGestionar.getFechaNacimiento();
         if(fechaNacimiento != null)
-            jTFFechaNacimiento.setText(SQLiteSource.formatter.format(fechaNacimiento));
+            jDateNacimiento.setDate(Date.from(animalGestionar.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         
-        jTFTipo.setText(animalGestionar.getTipo().toString());
+        jCBTipo.setSelectedItem(animalGestionar.getTipo());
         jTFCosto.setText(Double.toString(animalGestionar.getCosto()));
         jTFColor.setText(animalGestionar.getColor());
         jTFEdad.setText(animalGestionar.getEdad());
-
+        
+        setAnimalEditable(false);
         animalGestionar.ponerTratamientosEnTabla(jTableTratamientos);
     }
 
+    public void setAnimalEditable(boolean editable){
+        jBGuardar.setVisible(editable);
+        jTFNombre.setEnabled(editable);
+        jDateIngreso.setEnabled(editable);
+        jDateNacimiento.setEnabled(editable);
+        jCBTipo.setEnabled(editable);
+        jTFCosto.setEnabled(editable);
+        jTFColor.setEnabled(editable);
+    }
+    
     public void dibujarImagen(){
         try {
             Image foto = animalGestionar.getFoto();
@@ -92,13 +104,15 @@ public class GestionarAnimal extends javax.swing.JFrame {
         jDateTratamiento = new com.toedter.calendar.JDateChooser();
         jTFProductoUtilizado = new javax.swing.JTextField();
         jBEliminarTratamiento = new javax.swing.JButton();
-        jTFFechaIngreso = new javax.swing.JTextField();
-        jTFTipo = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTFFechaNacimiento = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jTFEdad = new javax.swing.JTextField();
         jLabImagen = new javax.swing.JLabel();
+        jBModificar = new javax.swing.JButton();
+        jBGuardar = new javax.swing.JButton();
+        jDateIngreso = new com.toedter.calendar.JDateChooser();
+        jDateNacimiento = new com.toedter.calendar.JDateChooser();
+        jCBTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -233,19 +247,34 @@ public class GestionarAnimal extends javax.swing.JFrame {
                 .addGap(57, 57, 57))
         );
 
-        jTFFechaIngreso.setEnabled(false);
-
-        jTFTipo.setEnabled(false);
-
         jLabel13.setText("Fecha de Nacimiento");
-
-        jTFFechaNacimiento.setEnabled(false);
 
         jLabel14.setText("Edad");
 
         jTFEdad.setEnabled(false);
 
         jLabImagen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jBModificar.setText("Modificar Datos");
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
+
+        jBGuardar.setText("Guardar Cambios");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
+
+        jDateIngreso.setEnabled(false);
+
+        jDateNacimiento.setEnabled(false);
+
+        jCBTipo.setModel(new javax.swing.DefaultComboBoxModel<>(TipoAnimal.values()));
+        jCBTipo.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,38 +293,39 @@ public class GestionarAnimal extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel13))
                                 .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTFNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(jBModificar)
+                                    .addComponent(jDateIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDateNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(85, 85, 85)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTFFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel7)
-                                        .addGap(45, 45, 45))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(85, 85, 85)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(3, 3, 3)
-                                                .addComponent(jLabel14)))
-                                        .addGap(43, 43, 43)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTFCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                            .addComponent(jTFColor)
-                                            .addComponent(jTFTipo, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                                            .addComponent(jTFEdad))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE))))
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jLabel14))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(112, 112, 112)
                                 .addComponent(jTF_id, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(85, 85, 85)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jLabel9)))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel7)
+                                .addGap(45, 45, 45))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jBGuardar)
+                                    .addComponent(jTFCosto, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(jTFColor)
+                                    .addComponent(jTFEdad)
+                                    .addComponent(jCBTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)))
                         .addComponent(jLabImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(43, 43, 43))
         );
@@ -312,7 +342,7 @@ public class GestionarAnimal extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jTF_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel9)
-                                .addComponent(jTFTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -326,22 +356,25 @@ public class GestionarAnimal extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jTFColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel6))
-                            .addComponent(jTFFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDateIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
                             .addComponent(jTFEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel13)
-                                .addComponent(jTFFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel13)
+                            .addComponent(jDateNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBModificar)
+                    .addComponent(jBGuardar))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -385,9 +418,38 @@ public class GestionarAnimal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBEliminarTratamientoActionPerformed
 
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+        setAnimalEditable(true);
+    }//GEN-LAST:event_jBModificarActionPerformed
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        animalGestionar.setNombre(jTFNombre.getText());
+        LocalDate fechaIngreso = jDateIngreso.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate fechaNacimiento = jDateNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        animalGestionar.setFechaIngreso(fechaIngreso);
+        animalGestionar.setFechaNacimiento(fechaNacimiento);
+        animalGestionar.setTipo(jCBTipo.getItemAt(jCBTipo.getSelectedIndex()));
+        animalGestionar.setCosto(Double.parseDouble(jTFCosto.getText()));
+        animalGestionar.setColor(jTFColor.getText());
+        
+        try {
+            animalGestionar.actualizar();
+            JOptionPane.showMessageDialog(this, "Animal modificado exitósamente");
+            setAnimalEditable(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionarAnimal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al intentar actualizar el animal", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBGuardarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAniadirTratamiento;
     private javax.swing.JButton jBEliminarTratamiento;
+    private javax.swing.JButton jBGuardar;
+    private javax.swing.JButton jBModificar;
+    private javax.swing.JComboBox<TipoAnimal> jCBTipo;
+    private com.toedter.calendar.JDateChooser jDateIngreso;
+    private com.toedter.calendar.JDateChooser jDateNacimiento;
     private com.toedter.calendar.JDateChooser jDateTratamiento;
     private javax.swing.JLabel jLabImagen;
     private javax.swing.JLabel jLabel1;
@@ -410,11 +472,8 @@ public class GestionarAnimal extends javax.swing.JFrame {
     private javax.swing.JTextField jTFCosto;
     private javax.swing.JTextField jTFDescripcion;
     private javax.swing.JTextField jTFEdad;
-    private javax.swing.JTextField jTFFechaIngreso;
-    private javax.swing.JTextField jTFFechaNacimiento;
     private javax.swing.JTextField jTFNombre;
     private javax.swing.JTextField jTFProductoUtilizado;
-    private javax.swing.JTextField jTFTipo;
     private javax.swing.JTextField jTF_id;
     private javax.swing.JTable jTableTratamientos;
     // End of variables declaration//GEN-END:variables

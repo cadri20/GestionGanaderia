@@ -235,5 +235,21 @@ public class SQLiteSource implements DataSource{
         
         s.executeUpdate();
     }
+
+    @Override
+    public void actualizarAnimal(Animal animal) throws SQLException {
+        String sql = "UPDATE animal SET nombre_animal = ?, fecha_ingreso = ?, fecha_nacimiento = ?, tipo = ?, costo = ?, color = ?, path_foto = ? WHERE id_animal = ?";
+        PreparedStatement s = conn.prepareStatement(sql);
+        
+        s.setString(1, animal.getNombre());
+        s.setString(2, SQLiteSource.formatter.format(animal.getFechaIngreso()));
+        s.setString(3, SQLiteSource.formatter.format(animal.getFechaNacimiento()));
+        s.setString(4, animal.getTipo().toString());
+        s.setDouble(5, animal.getCosto());
+        s.setString(6, animal.getColor());
+        s.setString(7, animal.getPathFoto());
+        s.setString(8, animal.getId());
+        s.executeUpdate();
+    }
         
 }

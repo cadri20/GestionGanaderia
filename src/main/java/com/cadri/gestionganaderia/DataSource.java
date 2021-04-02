@@ -23,4 +23,5 @@ public interface DataSource {
     public int getTotalAnimales(int idFinca);
     public void eliminarAnimal(String idAnimal) throws SQLException;
     public void eliminarTratamiento(String id_animal, String fecha, String descripcion) throws SQLException;
+    public void actualizarFinca(Finca finca) throws SQLException;
 }

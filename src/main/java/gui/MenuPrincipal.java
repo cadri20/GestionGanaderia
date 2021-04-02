@@ -30,6 +30,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTFHectareas.setText(Double.toString(finca.getNumHectareas()));
         jTFUbicacion.setText(finca.getUbicacion());
         
+        jBGuardarCambios.setVisible(false);
         actualizarDatosMostrados();
     }
 
@@ -102,8 +103,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTFUbicacion.setEditable(false);
 
         jBEditarDatos.setText("Editar Datos");
+        jBEditarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEditarDatosActionPerformed(evt);
+            }
+        });
 
         jBGuardarCambios.setText("Guardar Cambios");
+        jBGuardarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarCambiosActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Foto");
 
@@ -132,7 +143,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,6 +379,33 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gestionarAnimal.dibujarImagen();
     }//GEN-LAST:event_jBGestionarAnimalActionPerformed
 
+    private void jBGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarCambiosActionPerformed
+        finca.setNombre(jTFNombre.getText());
+        finca.setNumHectareas(Double.parseDouble(jTFHectareas.getText()));
+        finca.setUbicacion(jTFUbicacion.getText());
+        
+        try {
+            finca.actualizar();
+            JOptionPane.showMessageDialog(this, "Datos actualizados éxitosamente");
+            setFincaEditable(false);      
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al intentar actualizar la finca", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBGuardarCambiosActionPerformed
+
+    private void jBEditarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarDatosActionPerformed
+        setFincaEditable(true);
+    }//GEN-LAST:event_jBEditarDatosActionPerformed
+
+    private void setFincaEditable(boolean editable){
+        jTFNombre.setEditable(editable);
+        jTFHectareas.setEditable(editable);
+        jTFUbicacion.setEditable(editable);
+
+        jBGuardarCambios.setVisible(editable);  
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregarAnimal;
     private javax.swing.JButton jBEditarDatos;

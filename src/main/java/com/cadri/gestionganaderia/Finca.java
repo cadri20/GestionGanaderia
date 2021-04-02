@@ -82,6 +82,10 @@ public class Finca {
     public String getPathImagen() {
         return pathImagen;
     }
+
+    public int getId() {
+        return id;
+    }
     
     public Image getFoto() throws IOException{
         if(pathImagen == null)
@@ -101,6 +105,31 @@ public class Finca {
     public int getTotalAnimales(){
         return datos.getTotalAnimales(id);
     }
+    
+    public void actualizar() throws SQLException{
+        datos.actualizarFinca(this);
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setNumHectareas(double numHectareas) {
+        this.numHectareas = numHectareas;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public void setPathImagen(String pathImagen) {
+        this.pathImagen = pathImagen;
+    }
+
+    public void setDatos(DataSource datos) {
+        this.datos = datos;
+    }
+    
     
     @Override
     public String toString() {

@@ -1,5 +1,6 @@
 package com.cadri.gestionganaderia;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -29,6 +30,10 @@ public class SQLiteSource implements DataSource{
         conn = DriverManager.getConnection("jdbc:sqlite:" + url);
         Statement s = conn.createStatement();
         s.execute("PRAGMA foreign_keys = ON");
+    }
+    
+    public SQLiteSource(File fileDatabase) throws SQLException{
+        this(fileDatabase.getAbsolutePath());
     }
     
     @Override
@@ -250,6 +255,68 @@ public class SQLiteSource implements DataSource{
         s.setString(7, animal.getPathFoto());
         s.setString(8, animal.getId());
         s.executeUpdate();
+    }
+
+    @Override
+    public void init() {
+        String sql = "CREATE TABLE \"finca\" (\n"
+                + "	\"ID\"	INTEGER NOT NULL,\n"
+                + "	\"nombre_finca\"	TEXT NOT NULL,\n"
+                + "	\"hectareas\"	REAL,\n"
+                + "	\"ubicacion\"	TEXT,\n"
+                + "	\"path_foto\"	TEXT,\n"
+                + "	PRIMARY KEY(\"ID\" AUTOINCREMENT)\n"
+                + ");\n"
+                + "\n"
+                + "CREATE TABLE \"animal\" (\n"
+                + "	\"id_animal\"	INTEGER NOT NULL,\n"
+                + "	\"id_finca\"	TEXT,\n"
+                + "	\"nombre_animal\"	TEXT NOT NULL,\n"
+                + "	\"fecha_ingreso\"	TEXT,\n"
+                + "	\"fecha_nacimiento\"	INTEGER,\n"
+                + "	\"tipo\"	TEXT NOT NULL,\n"
+                + "	\"costo\"	REAL,\n"
+                + "	\"color\"	TEXT,\n"
+                + "	\"path_foto\"	TEXT,\n"
+                + "	PRIMARY KEY(\"id_animal\"),\n"
+                + "	FOREIGN KEY(\"id_finca\") REFERENCES \"finca\"(\"ID\") ON DELETE CASCADE\n"
+                + ");\n"
+                + "\n"
+                + "CREATE TABLE \"tratamiento\" (\n"
+                + "	\"id_animal\"	TEXT NOT NULL,\n"
+                + "	\"fecha\"	TEXT NOT NULL,\n"
+                + "	\"descripcion\"	TEXT NOT NULL,\n"
+                + "	\"producto_utilizado\"	TEXT,\n"
+                + "	FOREIGN KEY(\"id_animal\") REFERENCES \"animal\"(\"id_animal\") ON DELETE CASCADE\n"
+                + ");";
+        
+        try {
+            Statement s = conn.createStatement();
+            s.executeUpdate(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }
+
+    @Override
+    public boolean esValida() {
+        return existeTabla("finca") && existeTabla("animal") && existeTabla("tratamiento");
+    }
+    
+    private boolean existeTabla(String nombre){
+        String sql = "SELECT name FROM sqlite_master WHERE type = 'table' and name = '" + nombre + "'";
+        try {
+            Statement s = conn.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            if(rs.next())
+                return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
         
 }

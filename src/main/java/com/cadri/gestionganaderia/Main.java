@@ -2,6 +2,8 @@ package com.cadri.gestionganaderia;
 
 import gui.Inicio;
 import gui.MenuPrincipal;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +18,17 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Main {
     public static void main(String[] args){
         try {
-            DataSource datos = new SQLiteSource("C:\\Users\\Hp\\Documents\\ganaderia.db");
+            File dirUsuario = new File(System.getProperty("user.home") + File.separator + "Gestion Ganaderia");
+            File archivoDB = new File(dirUsuario.getAbsolutePath() + File.separator + "database.db");                  
+            
+            if(!dirUsuario.exists()){
+                dirUsuario.mkdir();                                
+            }  
+                  
+            DataSource datos = new SQLiteSource(archivoDB);
+            if(!datos.esValida())
+                datos.init();
+            
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             JFrame inicio = new Inicio(datos);
             inicio.setLocationRelativeTo(null);
@@ -33,4 +45,5 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 }

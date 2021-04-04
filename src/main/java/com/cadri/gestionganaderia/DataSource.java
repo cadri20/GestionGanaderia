@@ -11,6 +11,9 @@ import java.util.List;
  */
 public interface DataSource {
     
+    public void init();
+    public boolean esValida();
+    
     public Animal getAnimal(String id);
     public List<Animal> getAnimales(int idFinca);
     public Finca getFinca(String nombreFinca);

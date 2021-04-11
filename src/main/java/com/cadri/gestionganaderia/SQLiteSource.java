@@ -43,14 +43,13 @@ public class SQLiteSource implements DataSource{
         try {
             Statement s = conn.createStatement();
             rs = s.executeQuery(sql);
+            if(rs.isClosed())
+                return null;
         } catch (SQLException ex) {
             Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
         }       
         
-        if(rs == null)
-            return null;
-        else
-            return new Animal(rs, this);
+        return new Animal(rs, this);
     }
 
     @Override                                                                                                                               
@@ -131,7 +130,7 @@ public class SQLiteSource implements DataSource{
             return listaTratamientos;
                  
     }
-
+    
     @Override
     public void addFinca(Finca finca) {
         String sql = "INSERT INTO finca(nombre_finca,hectareas,ubicacion,path_foto) VALUES(?,?,?,?)";
@@ -151,7 +150,7 @@ public class SQLiteSource implements DataSource{
 
     @Override
     public void addAnimal(int idFinca, Animal animal) throws SQLException{
-        String sql = "INSERT INTO animal VALUES(?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO animal VALUES(?,?,?,?,?,?,?,?,?,?,?)";
           
         PreparedStatement s = conn.prepareStatement(sql);
         s.setString(1, animal.getId());
@@ -163,7 +162,13 @@ public class SQLiteSource implements DataSource{
         s.setDouble(7, animal.getCosto());
         s.setString(8, animal.getColor());
         s.setString(9, animal.getPathFoto());
-
+        
+        Animal padre = animal.getPadre();
+        Animal madre = animal.getMadre();
+        
+        s.setString(10, padre == null ? null : padre.getId());
+        s.setString(11, madre == null ? null: madre.getId());
+        
         s.executeUpdate();
 
     }
@@ -317,6 +322,23 @@ public class SQLiteSource implements DataSource{
         }
         
         return false;
+    }
+
+    @Override
+    public List<Animal> filtrarAnimal(int idFinca, String campo, String patron) {
+        String sql = "SELECT * FROM animal where id_finca = " + idFinca + " AND " + campo + " LIKE '" + patron + "%'";
+        List<Animal> listaAnimales = new ArrayList<>();
+        try {
+            Statement s = conn.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            while(rs.next()){
+                listaAnimales.add(new Animal(rs, this));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return listaAnimales;
     }
         
 }

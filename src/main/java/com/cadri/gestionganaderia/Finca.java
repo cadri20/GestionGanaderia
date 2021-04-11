@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -45,23 +47,19 @@ public class Finca {
         }
     }
     
-    public void ponerAnimalesEnTabla(JTable tabla){
-        tabla.setModel(new DefaultTableModel(getMatrizAnimales(), new String[]{"ID", "Nombre"}));
+    public List<Animal> filtrarAnimalesPorNombre(String patronNombre){
+        return datos.filtrarAnimal(id, "nombre_animal", patronNombre);
     }
     
-    private String[][] getMatrizAnimales(){
-        List<Animal> listaAnimales = getAnimales();
-        String[][] matrizAnimales = new String[listaAnimales.size()][2];
-        int i = 0;
-        
-        for(Animal animal: listaAnimales){
-            matrizAnimales[i][0] = animal.getId();
-            matrizAnimales[i][1] = animal.getNombre();
-            i++;
-        }
-        
-        return matrizAnimales;
+    public List<Animal> filtrarAnimalesPorId(String patronId){
+        return datos.filtrarAnimal(id, "id_animal", patronId);
     }
+    
+    public void mostrarAnimales(JComboBox<Animal> comboBox){
+        List<Animal> listaAnimales = getAnimales();
+        comboBox.setModel(new DefaultComboBoxModel<>(listaAnimales.toArray(new Animal[listaAnimales.size()])));
+    }
+    
     
     public void addAnimal(Animal animal) throws SQLException{
         datos.addAnimal(id, animal);
@@ -105,6 +103,11 @@ public class Finca {
     public int getTotalAnimales(){
         return datos.getTotalAnimales(id);
     }
+
+    public DataSource getDatos() {
+        return datos;
+    }
+    
     
     public void actualizar() throws SQLException{
         datos.actualizarFinca(this);

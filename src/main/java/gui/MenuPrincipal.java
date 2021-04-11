@@ -35,7 +35,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     public void actualizarDatosMostrados(){
-        finca.ponerAnimalesEnTabla(jTableAnimales);
+        GUIManager.ponerAnimalesEnTabla(jTableAnimales, finca.getAnimales());
         jTFNumToros.setText(Integer.toString(finca.getNum(Animal.TipoAnimal.TORO)));
         jTFNumVacas.setText(Integer.toString(finca.getNum(Animal.TipoAnimal.VACA)));
         jTFNumTerneros.setText(Integer.toString(finca.getNum(Animal.TipoAnimal.TERNERO)));

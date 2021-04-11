@@ -31,10 +31,11 @@ public class Animal {
     private double costo;
     private String color;
     private String pathFoto;
-    
+    private String idPadre;
+    private String idMadre;
     private DataSource datos;
 
-    public Animal(String id, String nombre, LocalDate fechaIngreso, LocalDate fechaNacimiento, TipoAnimal tipo, double costo, String color, String pathFoto) {
+    public Animal(DataSource datos, String id, String nombre, LocalDate fechaIngreso, LocalDate fechaNacimiento, TipoAnimal tipo, double costo, String color, String pathFoto, String idPadre, String idMadre) {
         this.id = id;
         this.nombre = nombre;
         this.fechaIngreso = fechaIngreso;
@@ -43,6 +44,9 @@ public class Animal {
         this.costo = costo;
         this.color = color;
         this.pathFoto = pathFoto;
+        this.idPadre = idPadre;
+        this.idMadre = idMadre;
+        this.datos = datos;
     }
     
     public Animal(ResultSet querySet, DataSource datos){
@@ -72,6 +76,8 @@ public class Animal {
             this.costo = querySet.getDouble("costo");
             this.color = querySet.getString("color");
             this.pathFoto = querySet.getString("path_foto");
+            this.idPadre = querySet.getString("id_padre");
+            this.idMadre = querySet.getString("id_madre");
         } catch (SQLException ex) {
             Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -109,6 +115,14 @@ public class Animal {
         return pathFoto;
     }
 
+    public Animal getPadre(){
+        return datos.getAnimal(idPadre);
+    }
+    
+    public Animal getMadre(){
+        return datos.getAnimal(idMadre);
+    }
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -205,6 +219,13 @@ public class Animal {
     public void actualizar() throws SQLException{
         datos.actualizarAnimal(this);
     }
+
+    @Override
+    public String toString() {
+        return id;
+    }
+    
+    
     
     public enum TipoAnimal{
         TORO("Toro"),

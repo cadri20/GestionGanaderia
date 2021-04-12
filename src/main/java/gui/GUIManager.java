@@ -1,7 +1,10 @@
 package gui;
 
 import com.cadri.gestionganaderia.Animal;
+import com.cadri.gestionganaderia.Finca;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,4 +30,14 @@ public class GUIManager {
 
         return matrizAnimales;
     }
+    
+    public static String getIDAnimalSeleccionado(JFrame root, Finca fincaGestionada){
+        SeleccionAnimal seleccionAnimal = new SeleccionAnimal(root, true, fincaGestionada);
+        seleccionAnimal.setVisible(true);
+        seleccionAnimal.dispose();
+        
+        return seleccionAnimal.getIdSeleccionada();
+    }
+    
+
 }

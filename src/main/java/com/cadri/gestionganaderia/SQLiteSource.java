@@ -1,6 +1,10 @@
 package com.cadri.gestionganaderia;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -262,47 +266,35 @@ public class SQLiteSource implements DataSource{
 
     @Override
     public void init() {
-        String sql = "CREATE TABLE \"finca\" (\n"
-                + "	\"ID\"	INTEGER NOT NULL,\n"
-                + "	\"nombre_finca\"	TEXT NOT NULL,\n"
-                + "	\"hectareas\"	REAL,\n"
-                + "	\"ubicacion\"	TEXT,\n"
-                + "	\"path_foto\"	TEXT,\n"
-                + "	PRIMARY KEY(\"ID\" AUTOINCREMENT)\n"
-                + ");\n"
-                + "\n"
-                + "CREATE TABLE \"animal\" (\n"
-                + "	\"id_animal\"	INTEGER NOT NULL,\n"
-                + "	\"id_finca\"	TEXT,\n"
-                + "	\"nombre_animal\"	TEXT NOT NULL,\n"
-                + "	\"fecha_ingreso\"	TEXT,\n"
-                + "	\"fecha_nacimiento\"	INTEGER,\n"
-                + "	\"tipo\"	TEXT NOT NULL,\n"
-                + "	\"costo\"	REAL,\n"
-                + "	\"color\"	TEXT,\n"
-                + "	\"path_foto\"	TEXT,\n"
-                + "	PRIMARY KEY(\"id_animal\"),\n"
-                + "	FOREIGN KEY(\"id_finca\") REFERENCES \"finca\"(\"ID\") ON DELETE CASCADE\n"
-                + ");\n"
-                + "\n"
-                + "CREATE TABLE \"tratamiento\" (\n"
-                + "	\"id_animal\"	TEXT NOT NULL,\n"
-                + "	\"fecha\"	TEXT NOT NULL,\n"
-                + "	\"descripcion\"	TEXT NOT NULL,\n"
-                + "	\"producto_utilizado\"	TEXT,\n"
-                + "	FOREIGN KEY(\"id_animal\") REFERENCES \"animal\"(\"id_animal\") ON DELETE CASCADE\n"
-                + ");";
-        
+              
         try {
+            File archivoSQL = getDDL_File();
+            String sql = getSQLFromFile(archivoSQL);
             Statement s = conn.createStatement();
             s.executeUpdate(sql);
         } catch (SQLException ex) {
+            Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
     }
 
+    private File getDDL_File(){
+        URL resource = getClass().getClassLoader().getResource("DDL.sql");
+        try {
+            return new File(resource.toURI());
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
+    private String getSQLFromFile(File archivo) throws IOException{
+        return new String(Files.readAllBytes(archivo.toPath()));
+    }
+    
     @Override
     public boolean esValida() {
         return existeTabla("finca") && existeTabla("animal") && existeTabla("tratamiento");

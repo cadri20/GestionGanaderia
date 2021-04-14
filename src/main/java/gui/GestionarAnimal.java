@@ -63,7 +63,7 @@ public class GestionarAnimal extends javax.swing.JFrame {
         try {
             Image foto = animalGestionar.getSigFoto();
             if(foto != null)
-                dibujarImagen(foto);
+                GUIManager.dibujarImagen(foto, jLabImagen);
         } catch (IOException ex) {
             Logger.getLogger(GestionarAnimal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -79,10 +79,7 @@ public class GestionarAnimal extends javax.swing.JFrame {
         jTFColor.setEnabled(editable);
     }
     
-    private void dibujarImagen(Image foto){
-        ImageIcon icono = new ImageIcon(foto.getScaledInstance(jLabImagen.getWidth(), jLabImagen.getHeight(), Image.SCALE_DEFAULT));
-        jLabImagen.setIcon(icono);
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -539,7 +536,7 @@ public class GestionarAnimal extends javax.swing.JFrame {
         try {
             Image imagenAnimal = animalGestionar.getSigFoto();
             if(imagenAnimal != null)
-                dibujarImagen(imagenAnimal);
+                GUIManager.dibujarImagen(imagenAnimal, jLabImagen);
         } catch (IOException ex) {
             Logger.getLogger(GestionarAnimal.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error al obtener la imagen", "Error", JOptionPane.ERROR_MESSAGE);
@@ -555,7 +552,7 @@ public class GestionarAnimal extends javax.swing.JFrame {
         animalGestionar.addFoto(path);
         if(jLabImagen.getIcon() == null){
             try {
-                dibujarImagen(animalGestionar.getSigFoto());
+                GUIManager.dibujarImagen(animalGestionar.getSigFoto(), jLabImagen);
             } catch (IOException ex) {
                 Logger.getLogger(GestionarAnimal.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "Ha ocurrido un error al obtener la imagen", "Error", JOptionPane.ERROR_MESSAGE);
@@ -567,7 +564,7 @@ public class GestionarAnimal extends javax.swing.JFrame {
         try {
             Image imagenAnimal = animalGestionar.getPrevFoto();
             if(imagenAnimal != null)
-                dibujarImagen(imagenAnimal);
+                GUIManager.dibujarImagen(imagenAnimal, jLabImagen);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error al obtener la imagen", "Error", JOptionPane.ERROR_MESSAGE);
         }        
@@ -580,9 +577,9 @@ public class GestionarAnimal extends javax.swing.JFrame {
             Image imagenPrevia = animalGestionar.getPrevFoto();
             Image imagenSig = animalGestionar.getSigFoto();
             if(imagenPrevia != null)
-                dibujarImagen(imagenPrevia);
+                GUIManager.dibujarImagen(imagenPrevia, jLabImagen);
             else if(imagenSig != null){
-                dibujarImagen(imagenSig);
+                GUIManager.dibujarImagen(imagenSig, jLabImagen);
             }else{
                 jLabImagen.setIcon(null);
             }

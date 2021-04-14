@@ -2,9 +2,12 @@ package gui;
 
 import com.cadri.gestionganaderia.Animal;
 import com.cadri.gestionganaderia.Finca;
+import java.awt.Image;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,6 +41,10 @@ public class GUIManager {
         
         return seleccionAnimal.getIdSeleccionada();
     }
-    
+
+    public static void dibujarImagen(Image foto, JLabel label){
+        ImageIcon icono = new ImageIcon(foto.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_DEFAULT));
+        label.setIcon(icono);
+    }    
 
 }

@@ -152,7 +152,8 @@ public class Animal {
 
     public void addFoto(String path){
         datos.addPathImagen(id, path);
-        pathsFoto.add(path);
+        if(pathsFoto != null)
+            pathsFoto.add(path);
     }
     
     

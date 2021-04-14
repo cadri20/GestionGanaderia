@@ -150,7 +150,7 @@ public class SQLiteSource implements DataSource{
 
     @Override
     public void addAnimal(int idFinca, Animal animal) throws SQLException{
-        String sql = "INSERT INTO animal VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO animal VALUES(?,?,?,?,?,?,?,?,?,?)";
           
         PreparedStatement s = conn.prepareStatement(sql);
         s.setString(1, animal.getId());
@@ -161,13 +161,12 @@ public class SQLiteSource implements DataSource{
         s.setString(6, animal.getTipo().toString());
         s.setDouble(7, animal.getCosto());
         s.setString(8, animal.getColor());
-        s.setString(9, animal.getPathFoto());
         
         Animal padre = animal.getPadre();
         Animal madre = animal.getMadre();
         
-        s.setString(10, padre == null ? null : padre.getId());
-        s.setString(11, madre == null ? null: madre.getId());
+        s.setString(9, padre == null ? null : padre.getId());
+        s.setString(10, madre == null ? null: madre.getId());
         
         s.executeUpdate();
 
@@ -248,7 +247,7 @@ public class SQLiteSource implements DataSource{
 
     @Override
     public void actualizarAnimal(Animal animal) throws SQLException {
-        String sql = "UPDATE animal SET nombre_animal = ?, fecha_ingreso = ?, fecha_nacimiento = ?, tipo = ?, costo = ?, color = ?, path_foto = ? WHERE id_animal = ?";
+        String sql = "UPDATE animal SET nombre_animal = ?, fecha_ingreso = ?, fecha_nacimiento = ?, tipo = ?, costo = ?, color = ? WHERE id_animal = ?";
         PreparedStatement s = conn.prepareStatement(sql);
         
         s.setString(1, animal.getNombre());
@@ -257,8 +256,7 @@ public class SQLiteSource implements DataSource{
         s.setString(4, animal.getTipo().toString());
         s.setDouble(5, animal.getCosto());
         s.setString(6, animal.getColor());
-        s.setString(7, animal.getPathFoto());
-        s.setString(8, animal.getId());
+        s.setString(7, animal.getId());
         s.executeUpdate();
     }
 
@@ -339,6 +337,55 @@ public class SQLiteSource implements DataSource{
         }
         
         return listaAnimales;
+    }
+
+    @Override
+    public List<String> getPathImagenes(String idAnimal) {
+        String sql = "SELECT path FROM imagen_animal WHERE id_animal = '" + idAnimal + "'";
+        ResultSet rs = null;
+        List<String> pathImagenes = new ArrayList<>();
+        
+        try {
+            Statement s = conn.createStatement();
+            rs = s.executeQuery(sql);
+            
+            while(rs.next()){
+                pathImagenes.add(rs.getString("path"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(rs == null)
+            return null;
+        else
+            return pathImagenes;
+    }
+
+    @Override
+    public void addPathImagen(String idAnimal, String pathImagen) {
+        String sql = "INSERT INTO imagen_animal VALUES(?,?)";
+        try {
+            PreparedStatement s = conn.prepareStatement(sql);
+            s.setString(1, idAnimal);
+            s.setString(2, pathImagen);
+            s.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    @Override
+    public void eliminarImagen(String idAnimal, String path) {
+         String sql = "DELETE FROM imagen_animal WHERE id_animal = '" + idAnimal + "' AND path = '" + path + "'";
+         
+         try{
+             Statement s = conn.createStatement();
+             s.executeUpdate(sql);
+         }catch(SQLException ex){
+             Logger.getLogger(SQLiteSource.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
         
 }

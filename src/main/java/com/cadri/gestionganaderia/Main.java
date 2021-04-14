@@ -16,14 +16,22 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author cadri
  */
 public class Main {
+    public static File dirUsuario;
+    public static File archivoDB;
+    public static File dirImg;
     public static void main(String[] args){
+        
         try {
-            File dirUsuario = new File(System.getProperty("user.home") + File.separator + "Gestion Ganaderia");
-            File archivoDB = new File(dirUsuario.getAbsolutePath() + File.separator + "database.db");                  
+            dirUsuario = new File(System.getProperty("user.home") + File.separator + "Gestion Ganaderia");
+            archivoDB = new File(dirUsuario.getAbsolutePath() + File.separator + "database.db");                  
+            dirImg = new File(dirUsuario.getAbsolutePath() + File.separator + "Imagenes");
             
             if(!dirUsuario.exists()){
                 dirUsuario.mkdir();                                
             }  
+            
+            if(!dirImg.exists())
+                dirImg.mkdir();
                   
             DataSource datos = new SQLiteSource(archivoDB);
             if(!datos.esValida())

@@ -376,7 +376,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         GestionarAnimal gestionarAnimal = new GestionarAnimal(animalSeleccionado);
         gestionarAnimal.setVisible(true);
         gestionarAnimal.setLocationRelativeTo(this);       
-        gestionarAnimal.dibujarImagen();
     }//GEN-LAST:event_jBGestionarAnimalActionPerformed
 
     private void jBGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarCambiosActionPerformed

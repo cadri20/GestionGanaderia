@@ -19,13 +19,16 @@ public interface DataSource {
     public Finca getFinca(String nombreFinca);
     public List<Finca> getFincas();
     public List<Tratamiento> getTratamientos(String idAnimal);
+    public List<String> getPathImagenes(String idAnimal);
     public void addFinca(Finca finca) throws SQLException;
     public void addAnimal(int idFinca, Animal animal) throws SQLException;
     public void addTratamiento(String idAnimal, Tratamiento tratamiento) throws SQLException;
+    public void addPathImagen(String idAnimal, String pathImagen);
     public int countTipo(int idFinca, TipoAnimal tipo);
     public int getTotalAnimales(int idFinca);
     public void eliminarAnimal(String idAnimal) throws SQLException;
     public void eliminarTratamiento(String id_animal, String fecha, String descripcion) throws SQLException;
+    public void eliminarImagen(String idAnimal, String path);
     public void actualizarFinca(Finca finca) throws SQLException;
     public void actualizarAnimal(Animal animal) throws SQLException;
     public List<Animal> filtrarAnimal(int idFinca, String campo, String patron);

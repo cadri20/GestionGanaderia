@@ -4,6 +4,8 @@ import com.cadri.gestionganaderia.Animal;
 import com.cadri.gestionganaderia.Animal.TipoAnimal;
 import com.cadri.gestionganaderia.DataSource;
 import com.cadri.gestionganaderia.Finca;
+import com.cadri.gestionganaderia.IOUtils;
+import com.cadri.gestionganaderia.Main;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.SecondaryLoop;
@@ -11,6 +13,8 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -202,13 +206,13 @@ public class AgregarAnimal extends javax.swing.JFrame {
                                             .addComponent(jTFPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jTFCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel10))
                                         .addGap(43, 43, 43)
                                         .addComponent(jTFMadre, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel7)
-                                .addGap(35, 35, 35)
                                 .addComponent(jBSelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(60, 60, 60))))))
         );
@@ -311,12 +315,15 @@ public class AgregarAnimal extends javax.swing.JFrame {
         File imagen = fc.getSelectedFile();
         String pathImagen = null;
         if(imagen != null)
-            pathImagen = imagen.getAbsolutePath();
+            pathImagen = IOUtils.guardarImagen(imagen);
         
-        Animal nuevoAnimal = new Animal(fincaGestionada.getDatos(), id, nombre, ingreso, nacimiento, tipo, costo, color, pathImagen, jTFPadre.getText(), jTFMadre.getText());
+        Animal nuevoAnimal = new Animal(fincaGestionada.getDatos(), id, nombre, ingreso, nacimiento, tipo, costo, color, jTFPadre.getText(), jTFMadre.getText());
         
-        try {
+        
+        try {            
             fincaGestionada.addAnimal(nuevoAnimal);
+            if(pathImagen != null)
+                nuevoAnimal.addFoto(pathImagen);
             JOptionPane.showMessageDialog(this, "Animal registrado con éxito");
             menu.actualizarDatosMostrados();
         } catch (SQLException ex) {
@@ -325,6 +332,8 @@ public class AgregarAnimal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jBRegistrarActionPerformed
+    
+
     
     private void jTFPadreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPadreMouseClicked
         jTFPadre.setText(GUIManager.getIDAnimalSeleccionado(this, fincaGestionada));

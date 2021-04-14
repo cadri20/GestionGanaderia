@@ -3,6 +3,7 @@ package com.cadri.gestionganaderia;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -30,12 +32,14 @@ public class Animal {
     private TipoAnimal tipo;
     private double costo;
     private String color;
-    private String pathFoto;
+    private List<String> pathsFoto;
     private String idPadre;
     private String idMadre;
+    
+    private int indFotoActual;
     private DataSource datos;
 
-    public Animal(DataSource datos, String id, String nombre, LocalDate fechaIngreso, LocalDate fechaNacimiento, TipoAnimal tipo, double costo, String color, String pathFoto, String idPadre, String idMadre) {
+    public Animal(DataSource datos, String id, String nombre, LocalDate fechaIngreso, LocalDate fechaNacimiento, TipoAnimal tipo, double costo, String color, String idPadre, String idMadre) {
         this.id = id;
         this.nombre = nombre;
         this.fechaIngreso = fechaIngreso;
@@ -43,10 +47,11 @@ public class Animal {
         this.tipo = tipo;
         this.costo = costo;
         this.color = color;
-        this.pathFoto = pathFoto;
         this.idPadre = idPadre;
         this.idMadre = idMadre;
         this.datos = datos;
+        
+        this.indFotoActual = -1;
     }
     
     public Animal(ResultSet querySet, DataSource datos){
@@ -75,9 +80,11 @@ public class Animal {
                 this.tipo = null;
             this.costo = querySet.getDouble("costo");
             this.color = querySet.getString("color");
-            this.pathFoto = querySet.getString("path_foto");
             this.idPadre = querySet.getString("id_padre");
             this.idMadre = querySet.getString("id_madre");
+            
+            this.pathsFoto = datos.getPathImagenes(id);
+            this.indFotoActual = -1;
         } catch (SQLException ex) {
             Logger.getLogger(Animal.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -109,10 +116,6 @@ public class Animal {
 
     public String getColor() {
         return color;
-    }
-
-    public String getPathFoto() {
-        return pathFoto;
     }
 
     public Animal getPadre(){
@@ -147,8 +150,9 @@ public class Animal {
         this.color = color;
     }
 
-    public void setPathFoto(String pathFoto) {
-        this.pathFoto = pathFoto;
+    public void addFoto(String path){
+        datos.addPathImagen(id, path);
+        pathsFoto.add(path);
     }
     
     
@@ -181,12 +185,42 @@ public class Animal {
         return datos.getTratamientos(id);
     }
     
-    public Image getFoto() throws IOException{
-        if(pathFoto == null)
+    public Image getSigFoto() throws IOException{
+        if(pathsFoto.isEmpty())
             return null;
         
-        File archivoFoto = new File(pathFoto);
+        if(indFotoActual != pathsFoto.size() - 1)
+            indFotoActual++;
+        
+        String pathActual = getPathActual();
+        File archivoFoto = new File(pathActual);
         return ImageIO.read(archivoFoto);
+        
+    }
+    
+    public Image getPrevFoto() throws IOException{
+        if(pathsFoto.isEmpty())
+            return null;
+        
+        if(indFotoActual != 0)
+            indFotoActual--;
+        
+        String pathActual = getPathActual();
+        File archivoFoto = new File(pathActual);
+        return ImageIO.read(archivoFoto);
+        
+    }
+    
+    private String getPathActual(){
+        return pathsFoto.get(indFotoActual);
+    }
+    
+    public void eliminarFotoActual(){
+        String path = getPathActual();
+        datos.eliminarImagen(id, path);
+        
+        pathsFoto.remove(indFotoActual);
+        new File(path).delete();
     }
     
     public void ponerTratamientosEnTabla(JTable tabla){

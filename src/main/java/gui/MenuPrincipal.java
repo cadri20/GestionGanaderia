@@ -69,25 +69,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jBAgregarAnimal = new javax.swing.JButton();
         jBGestionarAnimal = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTableAnimales = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        jPanelInformacionAnimales = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jTFNumVacas = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTFNumToros = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTFTotal = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jTFNumVaconas = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTFNumToros = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jTFNumTerneros = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jTFNumToretes = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTFTotal = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jPanelAnimales = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableAnimales = new javax.swing.JTable();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
         jTabbedPane1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
         jLabel1.setText("Nombre");
@@ -170,7 +173,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(jBEditarDatos)
                             .addComponent(jBGuardarCambios)))
                     .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Finca", new javax.swing.ImageIcon("C:\\Users\\Hp\\Desktop\\Programas propios\\GestionGanaderia\\src\\main\\resources\\hogar.png"), jPanel1); // NOI18N
@@ -196,6 +199,98 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Número de vacas:");
+
+        jTFNumVacas.setEditable(false);
+
+        jLabel9.setText("Número de vaconas:");
+
+        jTFNumVaconas.setEditable(false);
+
+        jLabel6.setText("Número de toros:");
+
+        jTFNumToros.setEditable(false);
+
+        jLabel10.setText("Número de terneros:");
+
+        jTFNumTerneros.setEditable(false);
+
+        jLabel11.setText("Número de toretes:");
+
+        jTFNumToretes.setEditable(false);
+
+        jLabel8.setText("Total:");
+
+        jTFTotal.setEditable(false);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel12.setText("Información General");
+
+        javax.swing.GroupLayout jPanelInformacionAnimalesLayout = new javax.swing.GroupLayout(jPanelInformacionAnimales);
+        jPanelInformacionAnimales.setLayout(jPanelInformacionAnimalesLayout);
+        jPanelInformacionAnimalesLayout.setHorizontalGroup(
+            jPanelInformacionAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInformacionAnimalesLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(jPanelInformacionAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelInformacionAnimalesLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelInformacionAnimalesLayout.createSequentialGroup()
+                        .addGroup(jPanelInformacionAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanelInformacionAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTFNumVacas, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                            .addComponent(jTFNumToros))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanelInformacionAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelInformacionAnimalesLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTFNumVaconas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelInformacionAnimalesLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(26, 26, 26)
+                                .addComponent(jTFNumToretes, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanelInformacionAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelInformacionAnimalesLayout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTFNumTerneros, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                            .addGroup(jPanelInformacionAnimalesLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTFTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(79, 79, 79))))
+        );
+        jPanelInformacionAnimalesLayout.setVerticalGroup(
+            jPanelInformacionAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInformacionAnimalesLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(jPanelInformacionAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTFNumVacas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTFNumVaconas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jTFNumTerneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelInformacionAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTFNumToros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jTFNumToretes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTFTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         jTableAnimales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -210,117 +305,75 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTableAnimales.setRowHeight(32);
         jScrollPane1.setViewportView(jTableAnimales);
 
-        jLabel5.setText("Número de vacas:");
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setText("Animales Registrados");
 
-        jTFNumVacas.setEditable(false);
-
-        jLabel6.setText("Número de toros:");
-
-        jTFNumToros.setEditable(false);
-
-        jLabel8.setText("Total:");
-
-        jTFTotal.setEditable(false);
-
-        jLabel9.setText("Número de vaconas:");
-
-        jTFNumVaconas.setEditable(false);
-
-        jLabel10.setText("Número de terneros:");
-
-        jTFNumTerneros.setEditable(false);
-
-        jLabel11.setText("Número de toretes:");
-
-        jTFNumToretes.setEditable(false);
+        javax.swing.GroupLayout jPanelAnimalesLayout = new javax.swing.GroupLayout(jPanelAnimales);
+        jPanelAnimales.setLayout(jPanelAnimalesLayout);
+        jPanelAnimalesLayout.setHorizontalGroup(
+            jPanelAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAnimalesLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(jPanelAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+        jPanelAnimalesLayout.setVerticalGroup(
+            jPanelAnimalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAnimalesLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 4, Short.MAX_VALUE)
-                        .addComponent(jBGestionarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))
+                    .addComponent(jBAgregarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBGestionarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addGap(386, 386, 386))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jBAgregarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGap(54, 54, 54)
+                                .addComponent(jPanelInformacionAnimales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel9))
-                                .addGap(26, 26, 26)
-                                .addComponent(jTFNumToretes, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTFNumVaconas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel5))
-                                .addGap(32, 32, 32)
-                                .addComponent(jTFNumVacas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTFNumToros, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTFTotal)
-                                    .addComponent(jTFNumTerneros, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))))))
-                .addGap(50, 50, 50))
+                                .addGap(74, 74, 74)
+                                .addComponent(jPanelAnimales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(37, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTFNumVacas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTFNumToros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBAgregarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jTFNumVaconas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(jTFNumTerneros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTFNumToretes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTFTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanelInformacionAnimales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBAgregarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
                         .addComponent(jBGestionarAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                        .addGap(40, 40, 40)
+                        .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(125, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanelAnimales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         jTabbedPane1.addTab("Animales", new javax.swing.ImageIcon("C:\\Users\\Hp\\Desktop\\Programas propios\\GestionGanaderia\\src\\main\\resources\\ganado.png"), jPanel2, ""); // NOI18N
@@ -330,53 +383,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 841, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        int filaSeleccionada = jTableAnimales.getSelectedRow();
-        String idSeleccionada = jTableAnimales.getValueAt(filaSeleccionada, 0).toString();    
-        int eleccion = JOptionPane.showConfirmDialog(this, "¿Esta seguro de que desea eliminar el animal con id " + idSeleccionada + "?", "", JOptionPane.YES_NO_OPTION);
-        if(eleccion == JOptionPane.NO_OPTION)
-            return;
-        
-        try {
-            datos.eliminarAnimal(idSeleccionada);
-            JOptionPane.showMessageDialog(this, "Animal eliminado éxitosamente");
-            actualizarDatosMostrados();
-        } catch (SQLException ex) {
-            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al intentar eliminar el animal", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jBEliminarActionPerformed
-
-    private void jBAgregarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarAnimalActionPerformed
-        JFrame creacionAnimal = new AgregarAnimal(finca, this);
-        creacionAnimal.setLocationRelativeTo(this);
-        creacionAnimal.setVisible(true);
-    }//GEN-LAST:event_jBAgregarAnimalActionPerformed
-
-    private void jBGestionarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGestionarAnimalActionPerformed
-        int filaSeleccionada = jTableAnimales.getSelectedRow();
-        String idSeleccionada = jTableAnimales.getValueAt(filaSeleccionada, 0).toString();
-        Animal animalSeleccionado = datos.getAnimal(idSeleccionada);
-        
-        GestionarAnimal gestionarAnimal = new GestionarAnimal(animalSeleccionado);
-        gestionarAnimal.setVisible(true);
-        gestionarAnimal.setLocationRelativeTo(this);       
-    }//GEN-LAST:event_jBGestionarAnimalActionPerformed
 
     private void jBGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarCambiosActionPerformed
         finca.setNombre(jTFNombre.getText());
@@ -397,6 +417,39 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setFincaEditable(true);
     }//GEN-LAST:event_jBEditarDatosActionPerformed
 
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        int filaSeleccionada = jTableAnimales.getSelectedRow();
+        String idSeleccionada = jTableAnimales.getValueAt(filaSeleccionada, 0).toString();
+        int eleccion = JOptionPane.showConfirmDialog(this, "¿Esta seguro de que desea eliminar el animal con id " + idSeleccionada + "?", "", JOptionPane.YES_NO_OPTION);
+        if(eleccion == JOptionPane.NO_OPTION)
+        return;
+
+        try {
+            datos.eliminarAnimal(idSeleccionada);
+            JOptionPane.showMessageDialog(this, "Animal eliminado éxitosamente");
+            actualizarDatosMostrados();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al intentar eliminar el animal", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jBGestionarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGestionarAnimalActionPerformed
+        int filaSeleccionada = jTableAnimales.getSelectedRow();
+        String idSeleccionada = jTableAnimales.getValueAt(filaSeleccionada, 0).toString();
+        Animal animalSeleccionado = datos.getAnimal(idSeleccionada);
+
+        GestionarAnimal gestionarAnimal = new GestionarAnimal(animalSeleccionado);
+        gestionarAnimal.setVisible(true);
+        gestionarAnimal.setLocationRelativeTo(this);
+    }//GEN-LAST:event_jBGestionarAnimalActionPerformed
+
+    private void jBAgregarAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarAnimalActionPerformed
+        JFrame creacionAnimal = new AgregarAnimal(finca, this);
+        creacionAnimal.setLocationRelativeTo(this);
+        creacionAnimal.setVisible(true);
+    }//GEN-LAST:event_jBAgregarAnimalActionPerformed
+
     private void setFincaEditable(boolean editable){
         jTFNombre.setEditable(editable);
         jTFHectareas.setEditable(editable);
@@ -414,6 +467,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -425,6 +480,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelAnimales;
+    private javax.swing.JPanel jPanelInformacionAnimales;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFHectareas;
     private javax.swing.JTextField jTFNombre;

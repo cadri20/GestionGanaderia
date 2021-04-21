@@ -3,11 +3,16 @@ package gui;
 import com.cadri.gestionganaderia.Animal;
 import com.cadri.gestionganaderia.DataSource;
 import com.cadri.gestionganaderia.Finca;
+import com.cadri.gestionganaderia.IOUtils;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -19,6 +24,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private Finca finca;
     private DataSource datos;
+    private JFileChooser fc;
     /**
      * Creates new form MenuPrincipal
      */
@@ -30,8 +36,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTFHectareas.setText(Double.toString(finca.getNumHectareas()));
         jTFUbicacion.setText(finca.getUbicacion());
         
+        fc = new JFileChooser();
+        fc.setFileFilter(GUIManager.filtroArchivos);
         jBGuardarCambios.setVisible(false);
         actualizarDatosMostrados();
+        Image fotoFinca = null;
+        try {
+            fotoFinca = finca.getFoto();
+        } catch (IOException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(fotoFinca != null)
+            GUIManager.dibujarImagen(fotoFinca, jLabelImagen);
     }
 
     public void actualizarDatosMostrados(){
@@ -65,6 +82,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jBGuardarCambios = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabelImagen = new javax.swing.JLabel();
+        jBCambiarFoto = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jBAgregarAnimal = new javax.swing.JButton();
         jBGestionarAnimal = new javax.swing.JButton();
@@ -129,39 +147,54 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jLabelImagen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jBCambiarFoto.setText("Cambiar Foto");
+        jBCambiarFoto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCambiarFotoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(200, Short.MAX_VALUE)
+                .addGap(79, 79, 79)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel3)
                         .addComponent(jLabel2)
                         .addComponent(jLabel1))
                     .addComponent(jBEditarDatos))
-                .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTFNombre)
-                        .addComponent(jTFHectareas)
-                        .addComponent(jTFUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jBGuardarCambios))
-                .addGap(60, 60, 60)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTFNombre)
+                            .addComponent(jTFHectareas)
+                            .addComponent(jTFUbicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jBGuardarCambios)
+                        .addGap(61, 61, 61)
+                        .addComponent(jBCambiarFoto)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(182, 182, 182))
+                    .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addComponent(jLabel4)
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(41, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -177,9 +210,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jBEditarDatos)
-                            .addComponent(jBGuardarCambios)))
-                    .addComponent(jLabelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(120, Short.MAX_VALUE))
+                            .addComponent(jBGuardarCambios)
+                            .addComponent(jBCambiarFoto))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(34, 34, 34))
         );
 
         jTabbedPane1.addTab("Finca", new javax.swing.ImageIcon(getClass().getResource("/hogar.png")), jPanel1); // NOI18N
@@ -518,6 +552,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
         GUIManager.ponerAnimalesEnTabla(jTableAnimales, finca.filtrarAnimalesPorNombre(jTFNombreBuscar.getText()));
     }//GEN-LAST:event_jTFNombreBuscarCaretUpdate
 
+    private void jBCambiarFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCambiarFotoActionPerformed
+        int decision = fc.showOpenDialog(this);
+        if(decision == JFileChooser.CANCEL_OPTION)
+            return;
+        
+        String pathImagenPrev = finca.getPathImagen();
+        if(pathImagenPrev != null){
+            new File(pathImagenPrev).delete();
+        }
+        File archivoImagen = fc.getSelectedFile();
+        finca.setPathImagen(IOUtils.guardarImagen(archivoImagen));
+        try {
+            finca.actualizar();
+            GUIManager.dibujarImagen(finca.getFoto(), jLabelImagen);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al intentar cambiar la foto en la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al leer el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBCambiarFotoActionPerformed
+
     private void setFincaEditable(boolean editable){
         jTFNombre.setEditable(editable);
         jTFHectareas.setEditable(editable);
@@ -528,6 +583,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregarAnimal;
+    private javax.swing.JButton jBCambiarFoto;
     private javax.swing.JButton jBEditarDatos;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBGestionarAnimal;

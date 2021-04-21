@@ -13,6 +13,11 @@ import java.util.logging.Logger;
  * @author cadri
  */
 public class IOUtils {
+    /**
+     * 
+     * @param imagen La imagen a guardar
+     * @return El path de la imagen guardada
+     */
     public static String guardarImagen(File imagen) {
         File archivoImagen = new File(Main.dirImg + File.separator + imagen.getName());
         try {

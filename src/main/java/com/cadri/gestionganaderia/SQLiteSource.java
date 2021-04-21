@@ -238,13 +238,14 @@ public class SQLiteSource implements DataSource{
 
     @Override
     public void actualizarFinca(Finca finca) throws SQLException {
-        String sql = "UPDATE finca SET nombre_finca = ?, hectareas = ?, ubicacion = ? WHERE id = ?";
+        String sql = "UPDATE finca SET nombre_finca = ?, hectareas = ?, ubicacion = ?, path_foto = ? WHERE id = ?";
         PreparedStatement s = conn.prepareStatement(sql);
         
         s.setString(1, finca.getNombre());
         s.setDouble(2, finca.getNumHectareas());
         s.setString(3, finca.getUbicacion());
-        s.setInt(4, finca.getId());
+        s.setString(4, finca.getPathImagen());
+        s.setInt(5, finca.getId());
         
         s.executeUpdate();
     }

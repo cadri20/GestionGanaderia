@@ -2,6 +2,7 @@ package gui;
 
 import com.cadri.gestionganaderia.DataSource;
 import com.cadri.gestionganaderia.Finca;
+import com.cadri.gestionganaderia.IOUtils;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -158,7 +159,7 @@ public class CrearFinca extends javax.swing.JFrame {
         File imagen = fc.getSelectedFile();
         String pathImagen = null;
         if(imagen != null)
-            pathImagen = imagen.getAbsolutePath();
+            pathImagen = IOUtils.guardarImagen(imagen);
         
         Finca nuevaFinca = new Finca(jTFNombre.getText(), Double.parseDouble(jTFNumHectareas.getText()), jTFUbicacion.getText(), pathImagen);
         

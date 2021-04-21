@@ -32,6 +32,7 @@ public class GestionarAnimal extends javax.swing.JFrame {
     public GestionarAnimal(Animal animalGestionar) {
         this.animalGestionar = animalGestionar;
         this.fc = new JFileChooser();
+        fc.setFileFilter(GUIManager.filtroArchivos);
         
         initComponents();
         

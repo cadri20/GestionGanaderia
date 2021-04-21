@@ -54,7 +54,7 @@
               <JTabbedPaneConstraints tabName="Finca">
                 <Property name="tabTitle" type="java.lang.String" value="Finca"/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Hp\Desktop\Programas propios\GestionGanaderia\src\main\resources\hogar.png"/>
+                  <Image iconType="3" name="/hogar.png"/>
                 </Property>
               </JTabbedPaneConstraints>
             </Constraint>
@@ -197,7 +197,7 @@
               <JTabbedPaneConstraints tabName="Animales" toolTip="">
                 <Property name="tabTitle" type="java.lang.String" value="Animales"/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="C:\Users\Hp\Desktop\Programas propios\GestionGanaderia\src\main\resources\ganado.png"/>
+                  <Image iconType="3" name="/ganado.png"/>
                 </Property>
                 <Property name="tabToolTip" type="java.lang.String" value=""/>
               </JTabbedPaneConstraints>

@@ -24,6 +24,7 @@ public class CrearFinca extends javax.swing.JFrame {
     public CrearFinca(DataSource datos) {
         this.datos = datos;
         fc = new JFileChooser();
+        fc.setFileFilter(GUIManager.filtroArchivos);
         initComponents();
     }
 

@@ -182,7 +182,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addContainerGap(120, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Finca", new javax.swing.ImageIcon("C:\\Users\\Hp\\Desktop\\Programas propios\\GestionGanaderia\\src\\main\\resources\\hogar.png"), jPanel1); // NOI18N
+        jTabbedPane1.addTab("Finca", new javax.swing.ImageIcon(getClass().getResource("/hogar.png")), jPanel1); // NOI18N
 
         jBAgregarAnimal.setText("Agregar Animal");
         jBAgregarAnimal.addActionListener(new java.awt.event.ActionListener() {
@@ -436,7 +436,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        jTabbedPane1.addTab("Animales", new javax.swing.ImageIcon("C:\\Users\\Hp\\Desktop\\Programas propios\\GestionGanaderia\\src\\main\\resources\\ganado.png"), jPanel2, ""); // NOI18N
+        jTabbedPane1.addTab("Animales", new javax.swing.ImageIcon(getClass().getResource("/ganado.png")), jPanel2, ""); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

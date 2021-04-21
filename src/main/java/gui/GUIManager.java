@@ -9,6 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GUIManager {
 
+    public static FileNameExtensionFilter filtroArchivos = new FileNameExtensionFilter("Imagen", "jpeg", "png");
+    
     public static void ponerAnimalesEnTabla(JTable tabla, List<Animal> animales) {
         tabla.setModel(new DefaultTableModel(getMatrizAnimales(animales), new String[]{"ID", "Nombre"}));
     }
